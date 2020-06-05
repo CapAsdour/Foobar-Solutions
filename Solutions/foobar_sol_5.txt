@@ -1,0 +1,14 @@
+def calc_steps(n):
+    size = n + 1
+    mat = [[0 for _ in xrange(size)] for _ in xrange(size)]
+    mat[0][0] = 1
+    for p in xrange(1, size):
+        for l in xrange(0, size):
+            mat[p][l] = mat[p - 1][l]
+            if l >= p:
+                mat[p][l] += mat[p - 1][l - p]
+
+    return mat[n][n] - 1
+def solution(n):
+    # Your code here
+    return calc_steps(n)

@@ -1,0 +1,27 @@
+def get_parent_index(h, index):
+    max_index = 2**h - 1
+    if max_index < index:
+        return -1
+    else:
+        node_offset = 0
+        continue_flag = True
+        subtree_size = max_index
+        output = -1 
+        
+        while continue_flag:
+            if subtree_size == 0:
+                continue_flag = False
+            subtree_size = subtree_size >> 1
+            l_node = node_offset + subtree_size
+            r_node = l_node + subtree_size
+            present_node = r_node + 1
+            if (l_node == index) or (r_node == index):
+                output = present_node
+                continue_flag = False
+            if (index > l_node):
+                node_offset = l_node
+   
+        return output
+
+def solution(h, q):
+    return [ get_parent_index(h, x) for x in q ]
